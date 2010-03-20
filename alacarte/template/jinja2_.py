@@ -34,7 +34,7 @@ class AbsolutePathLoader(BaseLoader):
         finally:
             f.close()
         
-        mtime = path.getmtime(path)
+        mtime = path.getmtime(filename)
         def uptodate():
             try:
                 return path.getmtime(filename) == mtime
