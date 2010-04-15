@@ -13,11 +13,11 @@ __all__ = ['render']
 
 def render(data, template=None, **kw):
     """Serialize data using PyYAML.
-    
+
     Accepts the same extended arguments as the PyYAML dump() function, see:
-    
+
         http://pyyaml.org/wiki/PyYAMLDocumentation#DumpingYAML
-    
+
     """
-    
+
     return 'application/x-yaml', yaml.dump(data, **kw)

@@ -6,26 +6,26 @@ __all__ = ['render', 'CodecError', 'EncodeError', 'DecodeError', 'Encoding', 'Ch
 
 def render(data, template=None, kind='enhanced'):
     """A bencoding serializer templating language.
-    
+
     Accepts the same extended arguments as the JSON dumps() function, see:
-    
+
         http://docs.python.org/library/json.html#json.dump
-    
+
     Data may be of any datatype supported by the json standard library or simplejson.
-    
+
     Sample usage:
-    
+
         >>> from alacarte.core import Engines
         >>> render = Engines()
         >>> render.bencode(dict(hello="world"))
         ('application/x-bencode', 'd5:hello5:worlde')
-        
+
     """
     codecs = dict(
             basic = Bencode(),
             enhanced = EnhancedBencode()
         )
-    
+
     return 'application/x-bencode', codecs[kind].encode(data)
 
 

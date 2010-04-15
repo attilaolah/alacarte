@@ -14,7 +14,7 @@ def serializer(engine, expected, *args, **kw):
 
 def test_builtin_serializers():
     render = Engines()
-    
+
     tests = [
             (render.bencode, ("foo", ),  dict(kind='basic'), ('application/x-bencode', '3:foo')),
             (render.bencode, (u"foo", ), {}, ('application/x-bencode', 'u3:foo')),
@@ -23,14 +23,14 @@ def test_builtin_serializers():
             (render.cpickle, ("foo", ),  {}, ('application/octet-stream', "S'foo'\np1\n.")),
             (render.yaml,    ("foo", ),  {}, ('application/x-yaml', 'foo\n...\n'))
         ]
-    
+
     # Marshal is version-specific.
     if sys.version_info < (2, 6):
         tests.append((render.marshal, ("foo", ),  {}, ('application/octet-stream', 't\x03\x00\x00\x00foo')))
-    
+
     elif sys.version_info < (3, 0):
         tests.append((render.marshal, ("foo", ),  {}, ('application/octet-stream', 's\x03\x00\x00\x00foo')))
-    
+
     for engine, args, kw, expected in tests:
         yield partial(serializer, engine, expected, *args, **kw)
 
